@@ -6,7 +6,6 @@ import {PROMOTIONS} from '../shared/promotions'
 import {LEADERS} from '../shared/leaderas'
 
 function RenderItem(props) {
-    console.log(props)
     const item = props.item;
     if (item != null) {
         return <Card
@@ -41,13 +40,13 @@ export class Home extends Component {
         return (
             <ScrollView>
                 <RenderItem
-                    item={DISHES.filter(dish => dish.featured)[0]}
+                    item={this.state.dishes.filter(dish => dish.featured)[0]}
                 />
                 <RenderItem
-                    item={PROMOTIONS.filter(promo => promo.featured)[0]}
+                    item={this.state.promotions.filter(promo => promo.featured)[0]}
                 />
                 <RenderItem
-                    item={LEADERS.filter(leader => leader.featured)[0]}
+                    item={this.state.leaders.filter(leader => leader.featured)[0]}
                 />
             </ScrollView>
         );
