@@ -34,7 +34,7 @@ export class AboutUs extends React.Component {
                     key={index}
                     title={item.name}
                     subtitle={item.description}
-                    leftAvatar={{source: require('./images/buffet.png')}}
+                    leftAvatar={{source: require('./images/alberto.png')}}
                 />
             )
         }
