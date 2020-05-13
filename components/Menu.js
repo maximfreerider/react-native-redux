@@ -1,17 +1,23 @@
 import React from "react";
 import {FlatList} from 'react-native'
-import {ListItem} from "react-native-elements"
-import {DishDetail} from "./DichDetail";
-import {DISHES} from '../shared/dishes';
+import {Tile} from "react-native-elements"
+import DishDetail from "./DichDetail";
+import {baseUrl} from "../shared/baseUrl";
+import {connect} from "react-redux";
 
+const mapStateToProps = state => {
+    return {
+        dishes: state.dishes
+    }
+}
 
-export class Menu extends React.Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-          dishes: DISHES
-      }
-  }
+// const mapDispatchToProps = dispatch => {
+//     return {
+//
+//     }
+// }
+
+class Menu extends React.Component {
 
   static navigationOptions = {
       title: 'Menu'
@@ -22,12 +28,12 @@ export class Menu extends React.Component {
 
       const renderMenuItem = ({item, index}) => {
           return (
-              <ListItem
+              <Tile
                   key={index}
                   title={item.name}
-                  subtitle={item.description}
-                  hideChevron={true}
-                  leftAvatar={{ source: require('./images/uthappizza.png') }}
+                  caption={item.description}
+                  featured
+                  imageSrc={{ uri: baseUrl + item.image }}
                   onPress={() => navigate('DishDetail', {dishId: item.id})}
               />
           )
@@ -35,7 +41,7 @@ export class Menu extends React.Component {
 
       return (
           <FlatList
-              data={this.state.dishes}
+              data={this.props.dishes.dishes}
               renderItem={renderMenuItem}
               keyExtractor={item => item.id.toString()}
           />
@@ -43,8 +49,4 @@ export class Menu extends React.Component {
   }
 }
 
-
-// dishes={this.state.dishes} onPress={(dishId) => this.onDishSelect(dishId)}/>
-// <DishDetail
-//     dish={this.state.dishes.filter(dish => dish.id === this.state.selectedDish)[0] || null}
-// />
+export default connect(mapStateToProps)(Menu)

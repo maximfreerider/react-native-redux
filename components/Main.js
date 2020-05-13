@@ -1,12 +1,27 @@
 import React, {Component} from 'react'
-import {Menu} from "./Menu"
-import {DishDetail} from "./DichDetail";
+import Menu from "./Menu"
+import DishDetail from "./DichDetail";
 import {View, Platform, Image, Text, StyleSheet, ScrollView} from "react-native";
 import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView} from 'react-navigation'
-import {Home} from './Home'
-import {AboutUs} from "./AboutUs";
+import Home from './Home'
+import AboutUs from "./AboutUs";
 import {ContactUs} from "./ContactUs";
 import {Icon} from "react-native-elements";
+import { fetchDishes, fetchComments, fetchPromos, fetchLeaders} from "../redux/ActionCreators";
+import {connect} from "react-redux";
+
+const mapStateToProps = state => {
+    return {}
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchDishes: () => dispatch(fetchDishes()),
+        fetchComments: () => dispatch(fetchComments()),
+        fetchPromos: () => dispatch(fetchPromos()),
+        fetchLeaders: () => dispatch(fetchLeaders()),
+    }
+}
 
 const ContactUsNavigator = createStackNavigator({
     ContactUs: {screen: ContactUs}
@@ -153,7 +168,15 @@ const MainNavigator = createDrawerNavigator({
     contentComponent: CustomDrawerContent
 });
 
-export class Main extends Component {
+class Main extends Component {
+
+    componentDidMount() {
+        this.props.fetchDishes()
+        this.props.fetchComments()
+        this.props.fetchPromos()
+        this.props.fetchLeaders()
+    }
+
     render() {
         return (
             <View style={{flex: 1, paddingTop: Platform.OS === 'ios'
@@ -165,6 +188,7 @@ export class Main extends Component {
     }
 }
 
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
 
 const styles = StyleSheet.create({
     container: {

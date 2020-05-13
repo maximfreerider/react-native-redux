@@ -3,6 +3,7 @@ import { baseUrl } from "../shared/baseUrl";
 
 
 export const fetchComments = () => (dispatch) => {
+    
     return fetch(baseUrl + 'comments')
         .then(response => {
             if (response.ok) {
@@ -10,7 +11,7 @@ export const fetchComments = () => (dispatch) => {
             } else {
                 let error = new Error('Error ' + response.status + ': ' + response.statusText)
                 error.response = response
-                throw error
+                throw error;
             }
         },
         error => {
@@ -34,34 +35,37 @@ export const addComments = (comments) => ({
 
 
 export const fetchDishes = () => (dispatch) => {
-    dispatch(dishesLoading())
+
+    dispatch(dishesLoading());
+
     return fetch(baseUrl + 'dishes')
         .then(response => {
+                console.log(response)
                 if (response.ok) {
-                    return response
+                    return response;
                 } else {
-                    let error = new Error('Error ' + response.status + ': ' + response.statusText)
-                    error.response = response
-                    throw error
+                    let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    error.response = response;
+                    throw error;
                 }
             },
             error => {
-                let errMess = new Error(error.message)
-                throw errMess
+                let errmess = new Error(error.message);
+                throw errmess;
             })
         .then(response => response.json())
         .then(dishes => dispatch(addDishes(dishes)))
-        .catch(error => dispatch(dishesFailed(error)))
-}
+        .catch(error => dispatch(dishesFailed(error.message)));
+};
 
 export const dishesLoading = () => ({
     type: ActionTypes.DISHES_LOADING
-})
+});
 
 export const dishesFailed = (errmess) => ({
     type: ActionTypes.DISHES_FAILED,
     payload: errmess
-})
+});
 
 export const addDishes = (dishes) => ({
     type: ActionTypes.ADD_DISHES,
