@@ -14,6 +14,7 @@ export const leaders = (state=localState, action) => {
     switch (action.type) {
         case ActionTypes.ADD_LEADERS:
             return {...state,
+                isLoading: false,
                 errMess: null,
                 leaders: action.payload
             }
@@ -26,7 +27,8 @@ export const leaders = (state=localState, action) => {
         case ActionTypes.LEADERS_FAILED:
             return {...state,
                 errMess: action.payload,
-                leaders: []
+                leaders: [],
+                isLoading: false
             }
         default:
             return state

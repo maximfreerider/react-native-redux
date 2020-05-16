@@ -40,7 +40,6 @@ export const fetchDishes = () => (dispatch) => {
 
     return fetch(baseUrl + 'dishes')
         .then(response => {
-                console.log(response)
                 if (response.ok) {
                     return response;
                 } else {
@@ -86,12 +85,12 @@ export const fetchPromos = () => (dispatch) => {
                 }
             },
             error => {
-                let errMess = new Error(error.message)
-                throw errMess
+                let errmess = new Error(error.message)
+                throw errmess
             })
         .then(response => response.json())
         .then(promos => dispatch(addPromos(promos)))
-        .catch(error => dispatch(promosFailed(error)))
+        .catch(error => dispatch(promosFailed(error.message)))
 }
 
 export const promosLoading = () => ({
@@ -115,18 +114,18 @@ export const fetchLeaders = () => (dispatch) => {
                 if (response.ok) {
                     return response
                 } else {
-                    let error = new Error('Error ' + response.status + ': ' + response.statusText)
-                    error.response = response
+                    let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    error.response = response;
                     throw error
                 }
             },
             error => {
-                let errMess = new Error(error.message)
-                throw errMess
+                let errmess = new Error(error.message);
+                throw errmess
             })
         .then(response => response.json())
         .then(leaders => dispatch(addLeaders(leaders)))
-        .catch(error => dispatch(leadersFailed(error)))
+        .catch(error => dispatch(leadersFailed(error.message)))
 }
 
 export const leadersLoading = () => ({
