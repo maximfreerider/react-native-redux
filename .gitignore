@@ -19,12 +19,14 @@ web-build
 
 # macOS
 .DS_Store
-
+assets
+assets/**/*
 # Node
 node_modules
 npm-debug.log
 yarn-error.log
-
+redux/customReducer.js
+components/CustomComponent.js
 # Ruby
 .direnv
 

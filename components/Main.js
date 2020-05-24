@@ -10,6 +10,7 @@ import {Icon} from "react-native-elements";
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders} from "../redux/ActionCreators";
 import {connect} from "react-redux";
 import Reservation from "./Reservation";
+import Favorites from "./Favorite";
 
 const mapStateToProps = state => {
     return {}
@@ -109,6 +110,21 @@ const ReservationNavigator = createStackNavigator({
     })
 })
 
+const FavoriteNavigator = createStackNavigator({
+    Favorites: {screen: Favorites}
+}, {
+    initialRouteName: 'Favorites',
+    navigationOptions: ({navigation}) =>  ({
+        headerStyle: {
+            backgroundColor: '#512DA8'
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            color: '#fff'
+        },
+        headerLeft: <Icon name={'menu'} color={'white'} size={30} onPress={() => navigation.toggleDrawer()}/>
+    })
+})
 
 const CustomDrawerContent = (props) => (
     <ScrollView>
@@ -192,7 +208,18 @@ const MainNavigator = createDrawerNavigator({
                       size={24} color={tintColor}/>
             )
         }
-
+    },
+    Favorites: {
+        screen: FavoriteNavigator,
+        navigationOptions: {
+            title: 'My Favorites',
+            drawerLabel: "My Favorites",
+            drawerIcon: ({tintColor}) => (
+                <Icon name={'heart'}
+                      type={'font-awesome'}
+                      size={24} color={tintColor}/>
+            )
+        }
     }
 }, {
     drawerBackgroundColor: '#D1C4E9',

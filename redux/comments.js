@@ -21,6 +21,11 @@ export const comments = (state=localState, action) => {
                 errMess: action.payload,
                 comments: []
             }
+        case ActionTypes.ADD_COMMENT:
+            console.log('comment reducer', state)
+            return {
+                ...state, comments: [...state.comments, action.payload]
+            }
         default:
             return state
     }

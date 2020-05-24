@@ -33,6 +33,23 @@ export const addComments = (comments) => ({
     payload: comments
 })
 
+export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+    const newComment = {
+        dishId, rating, author, comment
+    }
+    newComment.date = new Date().toISOString()
+    newComment.id = Math.floor(Math.random() * 10**4)
+    setTimeout(() => {
+        dispatch(addComment(newComment))
+        console.log('dispatched', newComment)
+    })
+}
+
+export const addComment = (comment) => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment
+})
+
 
 export const fetchDishes = () => (dispatch) => {
 
@@ -143,6 +160,7 @@ export const addLeaders = (leaders) => ({
 })
 
 export const postFavorite = (dishId) => (dispatch) => {
+    console.log(dishId)
     setTimeout(() => {
         dispatch(addFavorite(dishId))
     }, 2000)
@@ -150,5 +168,10 @@ export const postFavorite = (dishId) => (dispatch) => {
 
 export const addFavorite = (dishId) => ({
     type: ActionTypes.ADD_FAVORITE,
+    payload: dishId
+})
+
+export  const deleteFavorite = (dishId) => ({
+    type: ActionTypes.DELETE_FAVORITE,
     payload: dishId
 })
