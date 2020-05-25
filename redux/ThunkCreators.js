@@ -1,30 +1,17 @@
-import { baseUrl } from "../shared/baseUrl";
 import {addDishes, dishesFailed, dishesLoading} from "./actionCreators/dishActionCreators";
 import {addComment, addComments, commentsFailed} from "./actionCreators/commentActionCreators";
 import {addPromos, promosFailed, promosLoading} from "./actionCreators/promotionActionCreators";
 import {addLeaders, leadersFailed, leadersLoading} from "./actionCreators/leadersActionCreators";
+import {getData} from "../services/APIService";
 
 
 export const fetchComments = () => (dispatch) => {
-    
-    return fetch(baseUrl + 'comments')
-        .then(response => {
-            if (response.ok) {
-                return response
-            } else {
-                let error = new Error('Error ' + response.status + ': ' + response.statusText)
-                error.response = response
-                throw error;
-            }
-        },
-        error => {
-            let errMess = new Error(error.message)
-            throw errMess
-        })
+    return getData('comments')
         .then(response => response.json())
         .then(comments => dispatch(addComments(comments)))
         .catch(error => dispatch(commentsFailed(error)))
 }
+
 
 export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     const newComment = {
@@ -40,23 +27,8 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
 
 
 export const fetchDishes = () => (dispatch) => {
-
     dispatch(dishesLoading());
-
-    return fetch(baseUrl + 'dishes')
-        .then(response => {
-                if (response.ok) {
-                    return response;
-                } else {
-                    let error = new Error('Error ' + response.status + ': ' + response.statusText);
-                    error.response = response;
-                    throw error;
-                }
-            },
-            error => {
-                let errmess = new Error(error.message);
-                throw errmess;
-            })
+    return getData('dishes')
         .then(response => response.json())
         .then(dishes => dispatch(addDishes(dishes)))
         .catch(error => dispatch(dishesFailed(error.message)));
@@ -65,43 +37,16 @@ export const fetchDishes = () => (dispatch) => {
 
 export const fetchPromos = () => (dispatch) => {
     dispatch(promosLoading())
-    return fetch(baseUrl + 'promotions')
-        .then(response => {
-                if (response.ok) {
-                    return response
-                } else {
-                    let error = new Error('Error ' + response.status + ': ' + response.statusText)
-                    error.response = response
-                    throw error
-                }
-            },
-            error => {
-                let errmess = new Error(error.message)
-                throw errmess
-            })
+    return getData('promotions')
         .then(response => response.json())
         .then(promos => dispatch(addPromos(promos)))
         .catch(error => dispatch(promosFailed(error.message)))
 }
 
 
-
 export const fetchLeaders = () => (dispatch) => {
     dispatch(leadersLoading())
-    return fetch(baseUrl + 'leaders')
-        .then(response => {
-                if (response.ok) {
-                    return response
-                } else {
-                    let error = new Error('Error ' + response.status + ': ' + response.statusText);
-                    error.response = response;
-                    throw error
-                }
-            },
-            error => {
-                let errmess = new Error(error.message);
-                throw errmess
-            })
+    return getData('leaders')
         .then(response => response.json())
         .then(leaders => dispatch(addLeaders(leaders)))
         .catch(error => dispatch(leadersFailed(error.message)))
