@@ -12,34 +12,17 @@ npm-debug.*
 web-build/
 web-report/
 .idea/
-# macOS
-.DS_Store
+
 # Expo
 .expo
 __generated__
 web-build
 
-# macOS
-.DS_Store
-assets
-assets/**/*
 # Node
 node_modules
 npm-debug.log
 yarn-error.log
 redux/customReducer.js
-components/CustomComponent.js
-# Ruby
-.direnv
-
-# Emacs
-*~
-
-# Vim
-.*.swp
-.*.swo
-.*.swn
-.*.swm
 
 # Sublime Text
 *.sublime-project
