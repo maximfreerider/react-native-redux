@@ -4,8 +4,10 @@ import {baseUrl} from "../../shared/baseUrl";
 import {Text, View, PanResponder, Alert} from "react-native";
 import React from "react";
 
-export const RenderDish = (props) => {
+export const RenderDish= (props) => {
     const dish = props.dish;
+    let view
+    const handleViewRef = (ref) => view = ref
 
     const  recognizeDrag = ({moveX, moveY, dx, dy}) => {
         // проверка для того что бы убедиться что это реальный жест, по этому делаю
@@ -20,6 +22,10 @@ export const RenderDish = (props) => {
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: (e, gestureState) => {
             return true
+        },
+        onPanResponderGrant: (e, gestureState) => {
+            view.rubberBand(1000)
+                .then(endState => console.log(endState.finished ? 'finished' : 'cancelled'))
         },
         onPanResponderEnd: (e, gestureState) => {
             if(recognizeDrag(gestureState))
@@ -46,7 +52,8 @@ export const RenderDish = (props) => {
 
     if (dish !== null) {
         return (
-            <Animatable.View animation="fadeInDown" duration={2000} delay={1000} {...panResponder.panHandlers}>
+            <Animatable.View animation="fadeInDown" duration={2000}
+                             delay={1000} ref={handleViewRef} {...panResponder.panHandlers} >
                 <Card style={{marginBlockEnd: 25}} featuredTitle={dish.name} image={{ uri: baseUrl + dish.image}}>
                     <Text style={{margin: 10}}>{dish.description}</Text>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
