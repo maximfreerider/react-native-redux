@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import {ScrollView, Text, View, Animated, Easing} from "react-native"
-import {Card} from 'react-native-elements'
+import {Text, View, Animated, Easing} from "react-native"
 import {connect} from "react-redux";
-import {Loading} from "./Loading";
-import {baseUrl} from "../shared/baseUrl";
+import {Card} from "react-native-elements";
+import {baseUrl} from "../../shared/baseUrl";
+import {Loading} from "../Loading/Loading";
 
 const mapStateToProps = state => {
     return {
@@ -17,7 +17,7 @@ function RenderItem(props) {
     const item = props.item;
     if (props.isLoading) {
         return (
-            <Loading />
+            <Loading/>
         )
     } else if (props.errMess) {
         return (
@@ -58,8 +58,8 @@ class Home extends Component {
         Animated.timing(
             this.animatedValue,
             {
-                toValue: 8,
-                duration: 8000,
+                toValue: 7,
+                duration: 5000,
                 easing: Easing.linear
             }
         ).start(() => this.animate())

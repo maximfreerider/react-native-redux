@@ -1,5 +1,8 @@
-import * as ActionTypes from './ActionTypes'
 import { baseUrl } from "../shared/baseUrl";
+import {addDishes, dishesFailed, dishesLoading} from "./actionCreators/dishActionCreators";
+import {addComment, addComments, commentsFailed} from "./actionCreators/commentActionCreators";
+import {addPromos, promosFailed, promosLoading} from "./actionCreators/promotionActionCreators";
+import {addLeaders, leadersFailed, leadersLoading} from "./actionCreators/leadersActionCreators";
 
 
 export const fetchComments = () => (dispatch) => {
@@ -23,16 +26,6 @@ export const fetchComments = () => (dispatch) => {
         .catch(error => dispatch(commentsFailed(error)))
 }
 
-export const commentsFailed = (errmess) => ({
-    type: ActionTypes.COMMENTS_FAILED,
-    payload: errmess
-})
-
-export const addComments = (comments) => ({
-    type: ActionTypes.ADD_COMMENTS,
-    payload: comments
-})
-
 export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     const newComment = {
         dishId, rating, author, comment
@@ -44,11 +37,6 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
         console.log('dispatched', newComment)
     })
 }
-
-export const addComment = (comment) => ({
-    type: ActionTypes.ADD_COMMENT,
-    payload: comment
-})
 
 
 export const fetchDishes = () => (dispatch) => {
@@ -74,20 +62,6 @@ export const fetchDishes = () => (dispatch) => {
         .catch(error => dispatch(dishesFailed(error.message)));
 };
 
-export const dishesLoading = () => ({
-    type: ActionTypes.DISHES_LOADING
-});
-
-export const dishesFailed = (errmess) => ({
-    type: ActionTypes.DISHES_FAILED,
-    payload: errmess
-});
-
-export const addDishes = (dishes) => ({
-    type: ActionTypes.ADD_DISHES,
-    payload: dishes
-})
-
 
 export const fetchPromos = () => (dispatch) => {
     dispatch(promosLoading())
@@ -110,19 +84,7 @@ export const fetchPromos = () => (dispatch) => {
         .catch(error => dispatch(promosFailed(error.message)))
 }
 
-export const promosLoading = () => ({
-    type: ActionTypes.PROMOS_LOADING
-})
 
-export const promosFailed = (errmess) => ({
-    type: ActionTypes.PROMOS_FAILED,
-    payload: errmess
-})
-
-export const addPromos = (promos) => ({
-    type: ActionTypes.ADD_PROMOS,
-    payload: promos
-})
 
 export const fetchLeaders = () => (dispatch) => {
     dispatch(leadersLoading())
@@ -144,34 +106,3 @@ export const fetchLeaders = () => (dispatch) => {
         .then(leaders => dispatch(addLeaders(leaders)))
         .catch(error => dispatch(leadersFailed(error.message)))
 }
-
-export const leadersLoading = () => ({
-    type: ActionTypes.LEADERS_LOADING
-})
-
-export const leadersFailed = (errmess) => ({
-    type: ActionTypes.LEADERS_FAILED,
-    payload: errmess
-})
-
-export const addLeaders = (leaders) => ({
-    type: ActionTypes.ADD_LEADERS,
-    payload: leaders
-})
-
-export const postFavorite = (dishId) => (dispatch) => {
-    console.log(dishId)
-    setTimeout(() => {
-        dispatch(addFavorite(dishId))
-    }, 2000)
-}
-
-export const addFavorite = (dishId) => ({
-    type: ActionTypes.ADD_FAVORITE,
-    payload: dishId
-})
-
-export  const deleteFavorite = (dishId) => ({
-    type: ActionTypes.DELETE_FAVORITE,
-    payload: dishId
-})

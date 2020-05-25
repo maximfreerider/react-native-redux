@@ -1,8 +1,8 @@
-import * as ActionTypes from './ActionTypes'
+import * as ActionTypes from '../ActionTypes'
 const initialstate = {
     favorites: []
 }
-export const favorites = (state=[], action) => {
+export const favoritesReducer = (state=[], action) => {
     switch (action.type) {
         case ActionTypes.DELETE_FAVORITE:
             return state.filter(favorite => favorite !== action.payload)

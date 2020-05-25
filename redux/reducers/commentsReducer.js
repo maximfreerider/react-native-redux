@@ -1,15 +1,15 @@
 /*
-* comments reducer
+* commentsReducer reducer
 */
 
-import * as ActionTypes from './ActionTypes'
+import * as ActionTypes from '../ActionTypes'
 
 const localState = {
     errMess: null,
     comments: []
 }
 
-export const comments = (state=localState, action) => {
+export const commentsReducer = (state=localState, action) => {
     switch (action.type) {
         case ActionTypes.ADD_COMMENTS:
             return {...state,

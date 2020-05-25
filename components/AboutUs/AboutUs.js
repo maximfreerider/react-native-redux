@@ -2,9 +2,10 @@ import React from "react";
 import {Text, FlatList, ScrollView} from "react-native";
 import {Card, ListItem} from "react-native-elements";
 import {connect} from 'react-redux';
-import {baseUrl} from "../shared/baseUrl";
-import {Loading} from "./Loading";
+import {baseUrl} from "../../shared/baseUrl";
+import {Loading} from "../Loading/Loading";
 import * as Animatable from  'react-native-animatable';
+import {History} from "./History";
 
 
 const mapStateToProps = state => {
@@ -13,26 +14,13 @@ const mapStateToProps = state => {
     }
 }
 
-const History = () => {
-    return (
-        <Card title={"Our History"}>
-            <Text style={{marginTop: 2}}>
-                Started in 2010, Ristoante con Fusion quickly established itself as a culinary icon par excellence
-                in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys
-                patronage from the A-list clientele in Hong Kong.  Featuring four of the best three-star Michelin chefs
-                in the world, you never know what will arrive on your plate the next time you visit us.
-            </Text>
-            <Text style={{marginTop: 10}}>The restaurant traces its humble beginnings to The Frying Pan, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.
-            </Text>
-        </Card>
-    )
-}
-
 class AboutUs extends React.Component {
     static navigationOptions = {
         title: 'About Us'
     };
+
     render() {
+
         const renderLeader = ({item, index}) => {
             return (
                 <ListItem
@@ -43,6 +31,7 @@ class AboutUs extends React.Component {
                 />
             )
         }
+
         if (this.props.leaders.isLoading) {
             return (
                 <ScrollView>

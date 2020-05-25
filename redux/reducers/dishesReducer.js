@@ -1,8 +1,8 @@
 /*
-* dishes reducer
+* dishesReducer reducer
 */
 
-import * as ActionTypes from './ActionTypes'
+import * as ActionTypes from '../ActionTypes'
 
 const localState = {
     isLoading: true,
@@ -10,7 +10,7 @@ const localState = {
     dishes: []
 }
 
-export const dishes = (state= {
+export const dishesReducer = (state= {
     isLoading: true,
     errMess: null,
     dishes: []

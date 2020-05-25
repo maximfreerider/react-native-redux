@@ -1,10 +1,10 @@
 import React from "react";
 import {FlatList, View, Text} from 'react-native'
 import {Tile} from "react-native-elements"
-import DishDetail from "./DichDetail";
-import {baseUrl} from "../shared/baseUrl";
+import DishDetail from "../DishDetail/DichDetail";
+import {baseUrl} from "../../shared/baseUrl";
 import {connect} from "react-redux";
-import {Loading} from "./Loading";
+import {Loading} from "../Loading/Loading";
 import * as Animatable from 'react-native-animatable'
 
 const mapStateToProps = state => {
@@ -24,7 +24,7 @@ class Menu extends React.Component {
 
       const renderMenuItem = ({item, index}) => {
           return (
-              <Animatable.View animation="fadeInRightBig" duration={2000} delay={550}>
+              <Animatable.View animation="fadeInRightBig" duration={2000} delay={750}>
               <Tile
                   key={index}
                   title={item.name}

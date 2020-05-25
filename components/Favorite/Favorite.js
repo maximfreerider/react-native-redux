@@ -2,11 +2,11 @@ import React, {Component} from "react";
 import {View, FlatList, Text, Alert} from "react-native";
 import {ListItem} from "react-native-elements";
 import {connect} from 'react-redux'
-import {baseUrl} from "../shared/baseUrl";
-import {Loading} from "./Loading";
-import {deleteFavorite} from "../redux/ActionCreators";
+import {baseUrl} from "../../shared/baseUrl";
+import {Loading} from "../Loading/Loading";
 import Swipeout from "react-native-swipeout";
 import * as Animatable from 'react-native-animatable';
+import {deleteFavorite} from "../../redux/actionCreators/favoriteActionCreators";
 
 const mapStateToProps = (state) => {
     return {
@@ -27,6 +27,7 @@ class Favorites extends Component {
         const {navigate} = this.props.navigation
 
         const renderMenuItem  = ({item, index}) => {
+
             const rightButton = [
                 {
                     text: 'Delete',
