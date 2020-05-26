@@ -26,7 +26,7 @@ export const ConfigureStore = () => {
             leaders: leadersReducer,
             favorites: favoritesReducer
         }),
-        applyMiddleware(thunk, logger)
+        applyMiddleware(thunk)
     )
 
     const persistor = persistStore(store)

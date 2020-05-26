@@ -59,7 +59,7 @@ class Home extends Component {
             this.animatedValue,
             {
                 toValue: 7,
-                duration: 5000,
+                duration: 15000,
                 easing: Easing.linear
             }
         ).start(() => this.animate())
@@ -114,3 +114,5 @@ class Home extends Component {
 }
 
 export default connect(mapStateToProps)(Home)
+
+

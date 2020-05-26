@@ -8,9 +8,23 @@ import {ReservationNavigator} from "../StackNavigators/ReservationStackNavigator
 import {FavoriteNavigator} from "../StackNavigators/FavoriteStackNavigator";
 import React from "react";
 import {CustomDrawerContent} from "./CustomDrawerContent";
+import {LoginNavigator} from "../StackNavigators/LoginStackNavigator";
 
 
 export const MainNavigator = createDrawerNavigator({
+    Login: {
+        screen: LoginNavigator,
+        navigationOptions: {
+            title: 'Login',
+            drawerLabel: 'Login',
+            drawerIcon: ({tintColor}) => (
+                <Icon name={'sign-in'}
+                      type={'font-awesome'}
+                      size={24}
+                      color={tintColor}/>
+            )
+        }
+    },
     Home: {
         screen: HomeNavigator,
         navigationOptions: {
@@ -88,6 +102,7 @@ export const MainNavigator = createDrawerNavigator({
         }
     }
 }, {
+    initialRouteName: 'Home',
     drawerBackgroundColor: '#D1C4E9',
     contentComponent: CustomDrawerContent
 });
