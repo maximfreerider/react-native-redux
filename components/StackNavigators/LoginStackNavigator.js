@@ -1,7 +1,7 @@
 import {createStackNavigator} from "react-navigation";
-import Login from "../Login/Login";
 import {Icon} from "react-native-elements";
 import React from "react";
+import {Login} from "../Login/LoginRegisterBottomTabNav";
 
 export const LoginNavigator = createStackNavigator({
     Login: { screen: Login },

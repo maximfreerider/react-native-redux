@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import {View, Button, StyleSheet} from 'react-native'
-import {Card, Icon, Input, CheckBox} from 'react-native-elements'
+import {View, StyleSheet} from 'react-native'
+import { Icon, Input, CheckBox, Button} from 'react-native-elements'
 import {getItemAsync, setItemAsync, deleteItemAsync} from "expo-secure-store";
 
-class Login extends Component {
+export class LoginTab extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +26,10 @@ class Login extends Component {
     }
 
     static navigationOptions = {
-        title: 'Login'
+        title: 'Login',
+        tabBarIcon: ({tintColor}) => (
+            <Icon name='sign-in' type='font-awesome' size={24} iconStyle={{color: tintColor}}/>
+        )
     }
 
     handleLogin = () => {
@@ -70,6 +73,18 @@ class Login extends Component {
                         title='Login'
                         color={'#512DA8'}
                         onPress={() => this.handleLogin()}
+                        icon={<Icon style={{marginRight: 7}} name='sign-in' size={24} type='font-awesome' color='white'/>}
+                        buttonStyle={{backgroundColor: '#512DA8'}}
+                    />
+                </View>
+                <View style={styles.formButton}>
+                    <Button
+                        title='Register'
+                        color={'#512DA8'}
+                        clear
+                        onPress={() => this.props.navigation.navigate('Register')}
+                        icon={<Icon style={{marginRight: 7}} name='user-plus' size={24} type='font-awesome' color='white'/>}
+                        titleStyle={{color: 'blue'}}
                     />
                 </View>
             </View>
@@ -77,10 +92,23 @@ class Login extends Component {
     }
 }
 
+
+
+
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         margin: 20,
+    },
+    imageContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        margin: 20
+    },
+    image: {
+        margin: 20,
+        width: 80,
+        height: 60
     },
     formInput: {
         marginTop: 20
@@ -93,5 +121,3 @@ const styles = StyleSheet.create({
         margin: 25
     }
 })
-
-export default Login
