@@ -1,7 +1,7 @@
 import * as Animatable from "react-native-animatable";
 import {Card, Icon} from "react-native-elements";
 import {baseUrl} from "../../shared/baseUrl";
-import {Text, View, PanResponder, Alert} from "react-native";
+import {Text, View, PanResponder, Alert, Share} from "react-native";
 import React from "react";
 
 export const RenderDish= (props) => {
@@ -10,8 +10,7 @@ export const RenderDish= (props) => {
     const handleViewRef = (ref) => view = ref
 
     const  recognizeDrag = ({moveX, moveY, dx, dy}) => {
-        // проверка для того что бы убедиться что это реальный жест, по этому делаю
-        // проверку если провели по сенсору 200
+        // проверка для того что бы убедиться что это реальный жест
         if (dx < -200) {
             return true
         } else {
@@ -61,6 +60,16 @@ export const RenderDish= (props) => {
         }
     })
 
+    const shareDish = (title, message, url) => {
+        Share.share({
+            title: title,
+            message: title + ': ' + message + ' ' + url,
+            url: url
+        }, {
+            dialogTitle: 'Share ' + title
+        })
+    }
+
     if (dish !== null) {
         return (
             <Animatable.View animation="fadeInDown" duration={2000}
@@ -83,6 +92,14 @@ export const RenderDish= (props) => {
                             type={'font-awesome'}
                             color={'#512DA8'}
                             onPress={() => {props.toggleModal()}}
+                        />
+                        <Icon
+                            raised
+                            reverse
+                            name='share'
+                            type='font-awesome'
+                            color={'#51D2A8'}
+                            onPress={() => shareDish(dish.name, dish.description, baseUrl + dish.image)}
                         />
                     </View>
                 </Card>
