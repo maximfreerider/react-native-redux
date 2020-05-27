@@ -3,6 +3,8 @@ import {Text, View, ScrollView, StyleSheet, Switch, Picker, Button, Modal, Alert
 import DatePicker from "react-native-datepicker";
 import {ReservationModal} from "./ReservationModal";
 import * as Animatable from  'react-native-animatable';
+import {getAsync, USER_FACING_NOTIFICATIONS, askAsync} from "expo-permissions";
+import {Notifications} from "expo";
 
 class Reservation extends Component {
     constructor(props) {
@@ -21,8 +23,37 @@ class Reservation extends Component {
 
     toggleModal = () => this.setState({showModal: !this.state.showModal})
 
+    async obtainNotificationPermission () {
+        let permission = await getAsync(USER_FACING_NOTIFICATIONS)
+        if (permission.status !== 'granted') {
+            permission = await askAsync(USER_FACING_NOTIFICATIONS)
+            if (permission.status !== 'granted') {
+                Alert.alert(
+                    'Permission not granted to show notification'
+                )
+            }
+        }
+        return permission
+    }
+
+    async presentLocalNotification(date) {
+        await this.obtainNotificationPermission();
+        Notifications.presentLocalNotificationAsync({
+            title: 'Your Reservation',
+            body: 'Reservation for '+ date + ' requested',
+            ios: {
+                sound: true
+            },
+            android: {
+                sound: true,
+                vibrate: true,
+                color: '#512DA8'
+            }
+        });
+    }
+
+
     handleReservation = () => {
-        // this.toggleModal()
         Alert.alert(
             "Yor Reservation OK",
             `Nuber of Guests: ${this.state.guests}\nSmoking? ${this.state.smoking}\nDate and Time: ${this.state.date}`,
@@ -34,7 +65,10 @@ class Reservation extends Component {
                 },
                 {
                     text: 'OK',
-                    onPress: () => {this.resetForm()},
+                    onPress: () => {
+                        this.presentLocalNotification(this.state.date)
+                        this.resetForm()
+                    },
                     style:''
                 }
             ],
