@@ -5,6 +5,7 @@ import * as ImagePicker from "expo-image-picker";
 import {Button, CheckBox, Icon, Input} from "react-native-elements";
 import {setItemAsync} from "expo-secure-store";
 import {Image, ScrollView, StyleSheet, View} from "react-native";
+import * as ImageManipulator from '@pontusab/react-native-image-manipulator'
 
 export class RegisterTab extends Component {
     constructor(props) {
@@ -31,8 +32,16 @@ export class RegisterTab extends Component {
 
             if (!capturedImage.cancelled) {
                 this.setState({imageUrl: capturedImage.uri})
+                this.processImage(capturedImage.uri)
             }
         }
+    }
+
+    processImage = async (imageUri) => {
+        console.log('wqekjfhcqwlifhucwiufhcqiuhj', imageUri)
+        let processedImage = await ImageManipulator
+            .manipulateAsync(imageUri, [{resize: {width: 400}}])
+        this.setState({imageUrl: processedImage.uri})
     }
 
     static navigationOptions = {
