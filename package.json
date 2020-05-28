@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@pontusab/react-native-image-manipulator": "https://github.com/pontusab/react-native-image-manipulator",
+    "@react-native-community/netinfo": "^5.9.2",
     "@react-navigation/stack": "^5.2.19",
     "expo": "~37.0.3",
     "expo-image-picker": "^8.1.0",
