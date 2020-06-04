@@ -12,7 +12,7 @@ npm-debug.*
 web-build/
 web-report/
 .idea/
-
+tasks/
 # Expo
 .expo
 __generated__

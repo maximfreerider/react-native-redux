@@ -25,14 +25,14 @@ class Menu extends React.Component {
       const renderMenuItem = ({item, index}) => {
           return (
               <Animatable.View animation="fadeInRightBig" duration={2000} delay={750}>
-              <Tile
-                  key={index}
-                  title={item.name}
-                  caption={item.description}
-                  featured
-                  imageSrc={{ uri: baseUrl + item.image }}
-                  onPress={() => navigate('DishDetail', {dishId: item.id})}
-              />
+                  <Tile
+                      key={index}
+                      title={item.name}
+                      caption={item.description}
+                      featured
+                      imageSrc={{ uri: baseUrl + item.image }}
+                      onPress={() => navigate('DishDetail', {dishId: item.id})}
+                  />
               </Animatable.View>
           )
       };
